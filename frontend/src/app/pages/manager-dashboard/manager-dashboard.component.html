@@ -1,0 +1,57 @@
+<!-- Top Navigation Bar -->
+<nav class="navbar">
+  <div class="left-section">
+    <span class="welcome-text">Welcome, {{ username }}</span> <!-- Display username here -->
+    <span class="dashboard-title">Manager Dashboard</span> <!-- Manager Dashboard Title -->
+  </div>
+  <button class="logout-button" (click)="logout()">Logout</button> <!-- Logout button -->
+</nav>
+
+<!-- Filter Dropdown -->
+<div class="filter-container">
+  <label for="statusFilter">Filter by Status:</label>
+  <select id="statusFilter" [(ngModel)]="selectedStatus">
+    <option value="All">All</option>
+    <option value="Approved">Approved</option>
+    <option value="Rejected">Rejected</option>
+    <option value="Pending">Pending</option>
+  </select>
+</div>
+
+<!-- Leave Requests Table -->
+<table>
+  <thead>
+    <tr>
+      <th>Employee ID</th>
+      <th>Leave Type</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let request of getFilteredRequests()">
+      <td>{{ request.employee_id }}</td>
+      <td>{{ request.leave_type }}</td>
+      <td>{{ request.start_date }}</td>
+      <td>{{ request.end_date }}</td>
+      <td>{{ request.reason }}</td>
+      <td>{{ request.status }}</td>
+      <td>
+        <button *ngIf="request.status !== 'Approved'" 
+                (click)="updateLeaveStatus(request.leave_id, 'Approved')" 
+                class="approve-button">
+          Approve
+        </button>
+      
+        <button *ngIf="request.status !== 'Rejected'" 
+                (click)="updateLeaveStatus(request.leave_id, 'Rejected')" 
+                class="reject-button">
+          Reject
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

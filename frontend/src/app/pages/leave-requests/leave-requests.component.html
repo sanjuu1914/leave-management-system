@@ -1,0 +1,42 @@
+<button (click)="openLeaveForm()" class="apply-leave-btn">Apply Leave</button>
+
+<!-- Leave Application Form Modal -->
+<div *ngIf="showLeaveForm" class="modal">
+  <div class="modal-content">
+    <h2>Apply for Leave</h2>
+
+    <form (ngSubmit)="submitLeave($event)" #leaveForm="ngForm">
+      <!-- Leave Type -->
+      <label for="leaveType">Leave Type:</label>
+      <select id="leaveType" [(ngModel)]="leaveData.leaveType" name="leaveType" required>
+        <option value="Parental">Parental</option>
+        <option value="Sick">Sick</option>
+        <option value="Paid">Paid</option>
+        <option value="Casual">Casual</option>
+        <option value="Earned">Earned</option>
+      </select>
+
+      <!-- Start Date -->
+      <!-- Start and End Date Container -->
+<div class="date-container">
+  <div class="date-field">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" [(ngModel)]="leaveData.startDate" name="startDate" required min="{{ today }}"/>
+  </div>
+
+  <div class="date-field">
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" [(ngModel)]="leaveData.endDate" name="endDate" required min="{{ leaveData.startDate }}"/>
+  </div>
+</div>
+
+      <!-- Reason -->
+      <label for="reason">Reason:</label>
+      <textarea id="reason" [(ngModel)]="leaveData.reason" name="reason" required minlength="10"></textarea>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="leaveForm.invalid">Submit Leave</button>
+      <button type="button" (click)="closeLeaveForm()">Cancel</button>
+    </form>
+  </div>
+</div>

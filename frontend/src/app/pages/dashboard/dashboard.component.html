@@ -1,0 +1,79 @@
+<!-- Top Navigation Bar -->
+<nav class="navbar">
+  <span>Welcome, {{ username }}</span>
+  <button class="logout-btn" (click)="logout()">Logout</button>
+</nav>
+
+<!-- Leave History Section -->
+<div class="container">
+  <h2>Leave History</h2>
+  
+  <button class="apply-leave-btn" (click)="openModal()">Apply Leave</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaveHistory">
+        <td>{{ leave.leave_id }}</td> <!--  Fixed: Match backend response -->
+        <td>{{ leave.leave_type }}</td> <!--  Fixed -->
+        <td>{{ leave.start_date }}</td> <!--  Fixed -->
+        <td>{{ leave.end_date }}</td> <!--  Fixed -->
+        <td>{{ leave.reason }}</td> <!--  Fixed -->
+        <td [ngClass]="{'approved': leave.status === 'Approved', 'rejected': leave.status === 'Rejected', 'pending': leave.status === 'Pending', 'cancelled': leave.status === 'Cancelled'}">
+          {{ getStatusIcon(leave.status) }} {{ leave.status }}
+        </td>
+        <td>
+          <!-- <button class="edit-btn" (click)="editLeave(leave)" [disabled]="leave.status !== 'Pending'">Edit</button> -->
+          <button class="withdraw-btn" (click)="withdrawLeave(leave.leave_id)">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Apply For Leaves</h2>
+      <button class="close-btn" (click)="closeModal()">✕</button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <label>Leave Type</label>
+      <select [(ngModel)]="leaveType">
+        <option value="Sick">Sick Leave</option>
+        <option value="Parental">Personal Leave</option>
+        <option value="Casual">Annual Leave</option>
+        <option value="Paid">Paid Leave</option>
+        <option value="Earned">Others</option>
+
+      </select>
+
+      <label>Start Date</label>
+      <input type="date" [(ngModel)]="startDate" [min]="minDate" required>
+
+
+      <label>End Date</label>
+      <input type="date" [(ngModel)]="endDate" [min]="startDate" required>
+
+      <label>Reason</label>
+      <textarea [(ngModel)]="reason" placeholder="Input the reason"></textarea>
+
+      <!-- Submit Button -->
+      <button class="submit-btn" (click)="submitLeave()">Submit Leave
+      </button>
+    </div>
+  </div>
+</div>

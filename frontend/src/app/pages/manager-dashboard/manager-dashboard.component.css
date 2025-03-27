@@ -1,0 +1,196 @@
+body {
+  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 10px 50px;
+  color: white;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.welcome-text {
+  font-size: 18px;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #ff1a1a;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #002259;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+/* Filter Dropdown */
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align to the right */
+  margin: 20px 0;
+  gap: 10px; /* Space between label and dropdown */
+}
+
+.filter-container label {
+  font-weight: bold;
+  color: #002259;
+}
+
+.filter-container select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+  background-color: #f8f9fa;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+table th {
+  font-weight: 600;
+  color: #002259;
+}
+
+table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Status Column with Icon */
+.status-column {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+}
+
+.status-icon {
+  font-size: 18px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 10px; /* Space between approve and reject buttons */
+}
+
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Approve Button */
+.approve-button {
+  background-color: green;
+  color: white;
+}
+
+.approve-button:hover {
+  background-color: darkgreen;
+}
+
+/* Reject Button */
+.reject-button {
+  background-color: red;
+  color: white;
+}
+
+.reject-button:hover {
+  background-color: darkred;
+}
+
+/* Disabled Button */
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.status-column {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+  font-weight: bold;
+}
+
+/* Status Icon */
+.status-icon {
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .filter-container {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .actions {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    gap: 5px;
+  }
+}
